@@ -9,12 +9,5 @@ public class ProdutoService {
 	
 	ProdutoRepository produtoRepository = new ProdutoRepository(null, null);
 
-//	public List<Produto> listar(){
-//		
-//		
-//	}
-//	
-//	public Produto obterId(int id) {
-//		
-//	}
+
 }

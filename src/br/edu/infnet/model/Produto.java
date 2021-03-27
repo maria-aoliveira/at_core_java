@@ -7,24 +7,14 @@ public class Produto {
 	
 	private int id;
 	private String nome;
-//	private Date dataValidade;
 	private String dataValidade;
 	public static int nextId = 0;
 	
 	public Produto() {
 		super();
 	}
-	
-//	public Produto(String nome, Date dataValidade) {
-//		
-//		this.id = Produto.nextId;
-//		Produto.nextId++;
-//		this.nome = nome;
-//		this.dataValidade = dataValidade;
-//	}
-	
+
 	public Produto(String nome, String dataValidade) {
-		
 		this.id = Produto.nextId;
 		Produto.nextId++;
 		this.nome = nome;
@@ -47,15 +37,6 @@ public class Produto {
 		this.nome = nome;
 	}
 	
-//	public Date getData() {
-//		return this.dataValidade;
-//	}
-//	
-//	public void setData(Date data) {
-//		this.dataValidade = data;
-//	}
-	
-	
 	public String getData() {
 		return this.dataValidade;
 	}
@@ -63,6 +44,4 @@ public class Produto {
 	public void setData(String data) {
 		this.dataValidade = data;
 	}
-	
-
 }

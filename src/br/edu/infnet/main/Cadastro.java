@@ -103,9 +103,15 @@ public class Cadastro {
 					break;
 					
 				case 5:
-					System.out.println("Insira a Data (formato: dd/mm/yyyy): ");
-					data = sc.nextLine();
-					produtoRepository.listarPorData(data);
+					
+					try {
+						System.out.println("Insira a Data (formato: dd/mm/yyyy): ");
+						data = sc.nextLine();
+						produtoRepository.listarPorData(data);
+					}catch(Exception e) {
+						System.out.println(e);
+					}
+					
 					break;
 
 				default:
@@ -115,6 +121,7 @@ public class Cadastro {
 
 			} catch (Exception e) {
 				System.out.println("Erro: Insira um valor válido " + e);
+				
 			} finally {
 				System.out.println("Operação Finalizada" + "\n");
 			}

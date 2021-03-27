@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.IllegalFormatException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Locale;
@@ -23,9 +24,6 @@ public class ProdutoRepository extends Produto{
 	}
 	
 	public void PopularLista() {
-//		Date hoje = Calendar.getInstance().getTime();
-//		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
-//		String strDate = dateFormat.format(hoje);  
 		
 		produtos.add(new Produto("Açúcar", converte()));
 		produtos.add(new Produto("Sal", converte()));
@@ -85,14 +83,15 @@ public class ProdutoRepository extends Produto{
 		}
 	}
 	
-	public void listarPorData(String data) throws ParseException {
-	
+	public void listarPorData(String data) {
 		for(var item : produtos) {
 			if(item.getData().equals(data)) {
-				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
-				
+				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());		
 			}
-		}	
+		}
+		if (!produtos.contains(data)) {
+			System.out.println("Nada foi encontrado");
+		}
 	}
 	
 	public String converte() {
