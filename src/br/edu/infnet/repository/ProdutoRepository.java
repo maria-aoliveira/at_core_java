@@ -1,5 +1,6 @@
 package br.edu.infnet.repository;
 
+import br.edu.infnet.errors.IndexError;
 import br.edu.infnet.model.Produto;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -41,57 +42,57 @@ public class ProdutoRepository extends Produto{
 		}
 	}
 	
-	public Produto obterId(int id) {
+	public Produto obterId(int id) throws IndexError{
 		Produto produto = new Produto();
-		for(var item : produtos) {
+		if(id < produtos.size()) {
+			for(var item : produtos) {
 			if (item.getId() == id) {
 				produto = item;
 				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
 				break;
+				}
 			}
+		}else {
+			throw new IndexError("Esse id não existe!");
 		}
 		return produto;
 	}
 	
-	public void alterarProduto(Produto produto, int id) {
+	public void alterarProduto(Produto produto, int id) throws IndexError {
 		Produto produtoSalvo = obterId(id);
 		
 		produtoSalvo.setNome(produto.getNome());
 		produtoSalvo.setData(produto.getData());
 		
-//		listar();
+		listar();
 	}
 	
 	public void cadastrarProduto(Produto produto){
 		produtos.add(produto);
-		listar();
 	}
 	
-	public void excluirProduto(int id) {
-		for(var item : produtos) {
-			if (item.getId() == id) {
-				produtos.remove(item);
-				break;
-			}
+	public void excluirProduto(Integer id) throws IndexError{
+		if (id < produtos.size()){
+			for(var item : produtos) {
+				if (item.getId() == id) {
+					produtos.remove(item);
+					break;
+				}
+			}	
+			listar();
+		}else {
+			throw new IndexError("Esse id não existe!");
 		}
-		
-		listar();
 	}
 	
 	public void listarPorData(String data) throws ParseException {
-//		Date hoje = Calendar.getInstance().getTime();
-//		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");  
-//		String strDate = dateFormat.format(hoje);  
 	
-		converte();	
 		for(var item : produtos) {
 			if(item.getData().equals(data)) {
 				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
-				break;
+				
 			}
 		}	
-		
-		listar();
 	}
 	
 	public String converte() {
