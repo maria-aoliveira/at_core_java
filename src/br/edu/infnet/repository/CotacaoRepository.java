@@ -1,26 +1,64 @@
 package br.edu.infnet.repository;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 import br.edu.infnet.model.Cotacao;
 
-public class CotacaoRepository {
+public class CotacaoRepository extends Cotacao{
 	
-	private static Cotacao[] cotacao = {
-			new Cotacao(1, "Extra", 5.00f, 1),
-			new Cotacao(2, "Mundial", 6.00f, 2),
-			new Cotacao(3, "Carrefour", 8.00f, 3),
-			new Cotacao(4, "Supermarket", 15.00f, 4),
-			new Cotacao(5, "Wallmart", 35.00f, 5),
-	};
+	private static ArrayList<Cotacao> cotacoes = new ArrayList<Cotacao>();
+	private ProdutoRepository produtoRepository = new ProdutoRepository(null, null);
 	
-	public List<Cotacao> listar(){
-		return Arrays.asList(cotacao);
+	public CotacaoRepository(String nomeFornecedor) {
+		super();
 	}
 	
-	public Cotacao obterId(int id) {
-		return cotacao[id];
+	public void popularLista() {
+		cotacoes.add(new Cotacao("Extra"));
+		cotacoes.add(new Cotacao("Mundial"));
+		cotacoes.add(new Cotacao("Carrefour"));
+		cotacoes.add(new Cotacao("Supermarket"));
+		cotacoes.add(new Cotacao("Wallmart"));
+	}
+
+	public int cadastrarCotacao(Cotacao cotacao) {
+		cotacoes.add(cotacao);
+		return cotacao.getId();
 		
 	}
 	
+	public void listar(){
+		for(var item : cotacoes) {
+			System.out.println(item.getId() + " " + item.getNomeFornecedor());
+		}
+	}
+	
+	public Cotacao obterPeloId(int id) {
+		for(var item : cotacoes) {
+			if(item.getId() == id) {
+				System.out.println(item.getId() + " " + item.getNomeFornecedor());
+				return item;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void excluirPeloId(int id) {
+		for(var item : cotacoes) {
+			if(item.getId() == id) {
+				cotacoes.remove(item);
+				break;
+			}
+		}
+	}
+	
+	public int buscarPeloNome(String nome) {
+		for(var item: cotacoes) {
+			if(item.getNomeFornecedor().equals(nome)) {
+				return item.getId();
+			}
+		}
+		
+		return 0;
+	}
 }

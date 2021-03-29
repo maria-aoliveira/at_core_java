@@ -8,7 +8,7 @@ public class Produto {
 	private int id;
 	private String nome;
 	private String dataValidade;
-	public static int nextId = 0;
+	public static int nextId = 1;
 	
 	public Produto() {
 		super();

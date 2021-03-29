@@ -4,19 +4,16 @@ public class Cotacao {
 
 	private int id;
 	private String nomeFornecedor;
-	private Float preco;
-	private int id_Produto;
-		
+	public static int nextId = 1;
+
 	public Cotacao() {
 		super();
 	}
 
-	public Cotacao(int id, String nomeFornecedor, Float preco, int id_Produto) {
-		super();
-		this.id = id;
+	public Cotacao(String nomeFornecedor) {
+		this.id = Cotacao.nextId;
+		Cotacao.nextId++;
 		this.nomeFornecedor = nomeFornecedor;
-		this.preco = preco;
-		this.id_Produto = id_Produto;
 	}
 	
 	public int getId() {
@@ -31,23 +28,7 @@ public class Cotacao {
 		this.nomeFornecedor = nomeFornecedor;
 	}
 
-	public int getId_Produto() {
-		return this.id_Produto;
-	}
-
-	public void setId_Produto(int id_Produto) {
-		this.id_Produto = id_Produto;
-	}
-
 	public void setId(int id) {
 		this.id = id;
-	}
-	
-	public Float getPreco() {
-		return this.preco;
-	}
-	
-	public void setPreco(Float preco) {
-		this.preco = preco;
 	}
 }
