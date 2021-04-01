@@ -30,12 +30,11 @@ public class ProdutoRepository extends Produto{
 		produtos.add(new Produto("Arroz", "10/01/2020"));
 		produtos.add(new Produto("Feijão", "10/02/2020"));
 		produtos.add(new Produto("Nescau", "30/12/2019"));
-		produtos.add(new Produto("Miojo", converte()));
 	}	
 			
 			
 	public void listar(){
-		for(var produto : produtos) {
+		for(Produto produto : produtos) {
 			System.out.println(produto.getId() + " " + produto.getNome() + " " + produto.getData());
 		}
 	}
@@ -43,7 +42,7 @@ public class ProdutoRepository extends Produto{
 	public Produto obterId(int id) throws IndexError{
 		Produto produto = new Produto();
 		if(id < produtos.size()) {
-			for(var item : produtos) {
+			for(Produto item : produtos) {
 			if (item.getId() == id) {
 				produto = item;
 				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
@@ -71,7 +70,7 @@ public class ProdutoRepository extends Produto{
 	
 	public void excluirProduto(Integer id) throws IndexError{
 		if (id < produtos.size()){
-			for(var item : produtos) {
+			for(Produto item : produtos) {
 				if (item.getId() == id) {
 					produtos.remove(item);
 					break;
@@ -84,13 +83,23 @@ public class ProdutoRepository extends Produto{
 	}
 	
 	public void listarPorData(String data) {
-		for(var item : produtos) {
+		for(Produto item : produtos) {
 			if(item.getData().equals(data)) {
 				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());		
 			}
 		}
 		if (!produtos.contains(data)) {
 			System.out.println("Nada foi encontrado");
+		}
+	}
+	
+	
+	public void buscarPorNome(String nomeProduto) {
+		for(Produto item : produtos) {
+			if(item.getNome().equals(nomeProduto)) {
+				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
+				break;
+			}
 		}
 	}
 	

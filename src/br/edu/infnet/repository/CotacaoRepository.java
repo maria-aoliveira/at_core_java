@@ -22,18 +22,17 @@ public class CotacaoRepository extends Cotacao{
 
 	public int cadastrarCotacao(Cotacao cotacao) {
 		cotacoes.add(cotacao);
-		return cotacao.getId();
-		
+		return cotacao.getId();	
 	}
 	
 	public void listar(){
-		for(var item : cotacoes) {
+		for(Cotacao item : cotacoes) {
 			System.out.println(item.getId() + " " + item.getNomeFornecedor());
 		}
 	}
 	
 	public Cotacao obterPeloId(int id) {
-		for(var item : cotacoes) {
+		for(Cotacao item : cotacoes) {
 			if(item.getId() == id) {
 				System.out.println(item.getId() + " " + item.getNomeFornecedor());
 				return item;
@@ -44,7 +43,7 @@ public class CotacaoRepository extends Cotacao{
 	}
 	
 	public void excluirPeloId(int id) {
-		for(var item : cotacoes) {
+		for(Cotacao item : cotacoes) {
 			if(item.getId() == id) {
 				cotacoes.remove(item);
 				break;
@@ -53,9 +52,9 @@ public class CotacaoRepository extends Cotacao{
 	}
 	
 	public int buscarPeloNome(String nome) {
-		for(var item: cotacoes) {
+		for(Cotacao item: cotacoes) {
 			if(item.getNomeFornecedor().equals(nome)) {
-				return item.getId();
+				System.out.println(item.getId() + " " + item.getNomeFornecedor()); 
 			}
 		}
 		

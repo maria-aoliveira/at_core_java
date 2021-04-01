@@ -3,6 +3,8 @@ package br.edu.infnet.repository;
 import java.util.ArrayList;
 
 import br.edu.infnet.errors.IndexError;
+import br.edu.infnet.model.Cotacao;
+import br.edu.infnet.model.Produto;
 import br.edu.infnet.model.ProdutoCotacao;
 
 public class ProdutoCotacaoRepository {
@@ -13,8 +15,9 @@ public class ProdutoCotacaoRepository {
 	public void popularLista() {
 		produtosCotacoes.add(new ProdutoCotacao(4, 2, 5.5f));
 		produtosCotacoes.add(new ProdutoCotacao(2, 1, 6.7f));
-		produtosCotacoes.add(new ProdutoCotacao(6, 3, 6.7f));
+		produtosCotacoes.add(new ProdutoCotacao(1, 3, 6.7f));
 		produtosCotacoes.add(new ProdutoCotacao(4, 1, 6.7f));
+		produtosCotacoes.add(new ProdutoCotacao(3, 1, 6.7f));
 	}
 	
 	public void cadastrarProdutoCotacao(ProdutoCotacao produtoCotacao) {
@@ -22,9 +25,9 @@ public class ProdutoCotacaoRepository {
 	}
 	
 	public void listar() throws IndexError {
-		for(var item : produtosCotacoes) {
-			var produto = produtoRepository.obterId(item.getId_produto());
-			var cotacao = cotacaoRepository.obterPeloId(item.getId_cotacao());
+		for(ProdutoCotacao item : produtosCotacoes) {
+			Produto produto = produtoRepository.obterId(item.getId_produto());
+			Cotacao cotacao = cotacaoRepository.obterPeloId(item.getId_cotacao());
 			
 			System.out.println("Id: " + item.getIdProdutoCotacao());
 			System.out.println("Nome do produto: " + produto.getNome());
@@ -37,10 +40,25 @@ public class ProdutoCotacaoRepository {
 	}
 	
 	public void obterCotacaoId(int idCotacao) throws IndexError {
-		for(var item : produtosCotacoes) {
+		for(ProdutoCotacao item : produtosCotacoes) {
 			if (item.getId_cotacao()==idCotacao) {
-				var produto = produtoRepository.obterId(item.getId_produto());
-				var cotacao = cotacaoRepository.obterPeloId(item.getId_cotacao());
+				Produto produto = produtoRepository.obterId(item.getId_produto());
+				Cotacao cotacao = cotacaoRepository.obterPeloId(item.getId_cotacao());
+				
+				System.out.println("Nome do produto: " + produto.getNome());
+				System.out.println("Data: " + produto.getData());
+				System.out.println("Nome do fornecedor: " + cotacao.getNomeFornecedor());
+				System.out.println("Preço do produto: " + item.getPreco());
+				System.out.println("");
+			}
+		}
+	}
+	
+	public void obterProdutoId(int idProduto) throws IndexError {
+		for(ProdutoCotacao item : produtosCotacoes) {
+			if(item.getId_produto() == idProduto) {
+				Produto produto = produtoRepository.obterId(item.getId_produto());
+				Cotacao cotacao = cotacaoRepository.obterPeloId(item.getId_cotacao());
 				
 				System.out.println("Nome do produto: " + produto.getNome());
 				System.out.println("Data: " + produto.getData());
