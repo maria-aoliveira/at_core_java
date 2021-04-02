@@ -1,6 +1,5 @@
 package br.edu.infnet.repository;
 
-import br.edu.infnet.errors.IndexError;
 import br.edu.infnet.model.Produto;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -39,23 +38,21 @@ public class ProdutoRepository extends Produto{
 		}
 	}
 	
-	public Produto obterId(int id) throws IndexError{
+	public Produto obterId(int id) {
+		boolean result;
 		Produto produto = new Produto();
-		if(id < produtos.size()) {
-			for(Produto item : produtos) {
+		for(Produto item : produtos) {
 			if (item.getId() == id) {
 				produto = item;
 				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
 				break;
-				}
 			}
-		}else {
-			throw new IndexError("Esse id não existe!");
 		}
+		
 		return produto;
 	}
 	
-	public void alterarProduto(Produto produto, int id) throws IndexError {
+	public void alterarProduto(Produto produto, int id){
 		Produto produtoSalvo = obterId(id);
 		
 		produtoSalvo.setNome(produto.getNome());
@@ -64,42 +61,53 @@ public class ProdutoRepository extends Produto{
 		listar();
 	}
 	
-	public void cadastrarProduto(Produto produto){
+	public int cadastrarProduto(Produto produto){
 		produtos.add(produto);
+		return produto.getId();
 	}
 	
-	public void excluirProduto(Integer id) throws IndexError{
-		if (id < produtos.size()){
-			for(Produto item : produtos) {
-				if (item.getId() == id) {
-					produtos.remove(item);
-					break;
-				}
-			}	
-			listar();
-		}else {
-			throw new IndexError("Esse id não existe!");
+	public void excluirProduto(int id) {
+		for(Produto item : produtos) {
+			if (item.getId() == id) {
+				produtos.remove(item);
+				break;
+			}
 		}
+		listar();
 	}
 	
 	public void listarPorData(String data) {
 		for(Produto item : produtos) {
 			if(item.getData().equals(data)) {
-				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());		
+				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());	
+				
 			}
+			
 		}
 		if (!produtos.contains(data)) {
-			System.out.println("Nada foi encontrado");
+			System.out.println("Fim dos resultados");
 		}
+		
 	}
 	
 	
-	public void buscarPorNome(String nomeProduto) {
-		for(Produto item : produtos) {
-			if(item.getNome().equals(nomeProduto)) {
-				System.out.println(item.getId() + " " + item.getNome() + " " + item.getData());
-				break;
+	public int buscarPorNome(String nomeProduto) {
+		Produto produto = null;
+		if(produtos != null && produtos.size() > 0) {
+			for(Produto item : produtos) {
+				if(item.getNome().equals(nomeProduto)) {
+					produto = item;
+					break;
+				}
 			}
+		}		
+		
+		if(produto != null) {
+			System.out.println(produto.getId() + " " + produto.getNome() + " " + produto.getData());
+			return produto.getId();
+		}else {
+			int idProduto = cadastrarProduto(new Produto(nomeProduto, converte()));
+			return idProduto;
 		}
 	}
 	

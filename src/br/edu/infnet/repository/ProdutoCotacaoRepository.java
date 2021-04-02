@@ -2,7 +2,7 @@ package br.edu.infnet.repository;
 
 import java.util.ArrayList;
 
-import br.edu.infnet.errors.IndexError;
+import br.edu.infnet.errors.Custom;
 import br.edu.infnet.model.Cotacao;
 import br.edu.infnet.model.Produto;
 import br.edu.infnet.model.ProdutoCotacao;
@@ -24,7 +24,7 @@ public class ProdutoCotacaoRepository {
 		produtosCotacoes.add(produtoCotacao);
 	}
 	
-	public void listar() throws IndexError {
+	public void listar(){
 		for(ProdutoCotacao item : produtosCotacoes) {
 			Produto produto = produtoRepository.obterId(item.getId_produto());
 			Cotacao cotacao = cotacaoRepository.obterPeloId(item.getId_cotacao());
@@ -34,12 +34,11 @@ public class ProdutoCotacaoRepository {
 			System.out.println("Data: " + produto.getData());
 			System.out.println("Nome do fornecedor: " + cotacao.getNomeFornecedor());
 			System.out.println("Preço do produto: " + item.getPreco());
-			System.out.println("---------------------------------------");
-		
+			System.out.println("---------------------------------------");	
 		}
 	}
 	
-	public void obterCotacaoId(int idCotacao) throws IndexError {
+	public void obterCotacaoId(int idCotacao){
 		for(ProdutoCotacao item : produtosCotacoes) {
 			if (item.getId_cotacao()==idCotacao) {
 				Produto produto = produtoRepository.obterId(item.getId_produto());
@@ -54,7 +53,7 @@ public class ProdutoCotacaoRepository {
 		}
 	}
 	
-	public void obterProdutoId(int idProduto) throws IndexError {
+	public void obterProdutoId(int idProduto){
 		for(ProdutoCotacao item : produtosCotacoes) {
 			if(item.getId_produto() == idProduto) {
 				Produto produto = produtoRepository.obterId(item.getId_produto());

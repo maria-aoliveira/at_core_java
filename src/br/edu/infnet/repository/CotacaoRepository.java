@@ -52,12 +52,29 @@ public class CotacaoRepository extends Cotacao{
 	}
 	
 	public int buscarPeloNome(String nome) {
-		for(Cotacao item: cotacoes) {
-			if(item.getNomeFornecedor().equals(nome)) {
-				System.out.println(item.getId() + " " + item.getNomeFornecedor()); 
+		Cotacao cotacao = null;
+		if(cotacoes != null && cotacoes.size() > 0) {
+			for(Cotacao item: cotacoes) {
+				if(item.getNomeFornecedor().equals(nome)) {
+					cotacao = item;
+					break;
+				}
 			}
 		}
 		
-		return 0;
+		if(cotacao != null) {
+			return cotacao.getId();
+		}else {
+			var idCotacao = cadastrarCotacao(new Cotacao(nome));
+			return idCotacao;
+		}
+	}
+	
+	public void alterarCotacao(String nomeFornecedor, int idCotacao) {
+		for(Cotacao item : cotacoes) {
+			if(item.getId() == idCotacao) {
+				item.setNomeFornecedor(nomeFornecedor);
+			}
+		}
 	}
 }
